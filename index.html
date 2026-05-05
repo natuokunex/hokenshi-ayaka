@@ -200,9 +200,20 @@ hr{border:none;border-top:1px solid var(--c-line);margin:18px 0}
 .pdf-docs{display:flex;gap:8px;flex-wrap:wrap}
 .pdf-doc{border:1px solid var(--c-line);border-radius:999px;background:#fff;padding:7px 12px;font-size:13px;font-weight:600}
 .pdf-doc.on{background:var(--c-blue);border-color:var(--c-blue);color:#fff}
+.pdf-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.pdf-frame-wrap{background:#d8d8dc}
 .pdf-frame{width:100%;height:620px;border:0;background:var(--c-bg-2);display:block}
 .pdf-fallback{padding:10px 12px;border-top:1px solid var(--c-line);font-size:13px;color:var(--c-text-2);letter-spacing:normal}
-@media(max-width:640px){.pdf-frame{height:520px}.pdf-toolbar{align-items:flex-start}.pdf-doc{font-size:12px;padding:7px 10px}}
+@media(max-width:640px){
+  .pdf-toolbar{align-items:stretch;flex-direction:column;padding:10px}
+  .pdf-docs{display:grid;grid-template-columns:1fr;gap:8px}
+  .pdf-doc{width:100%;font-size:14px;padding:10px 12px;text-align:center}
+  .pdf-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%}
+  .pdf-actions .btn{width:100%;justify-content:center;padding:10px 8px}
+  .pdf-frame-wrap{height:min(68vh,540px);overflow:auto;-webkit-overflow-scrolling:touch}
+  .pdf-frame{height:100%;min-height:460px}
+  .pdf-fallback{font-size:12px;line-height:1.6}
+}
 
 /* type tag */
 .type-tag{display:inline-block;padding:2px 8px;border-radius:6px;font-size:10px;font-weight:600;letter-spacing:normal;margin-left:4px;vertical-align:middle}
@@ -1045,12 +1056,14 @@ function viewInfo(){
     $app.querySelectorAll("[data-pdf-url]").forEach(btn=>btn.onclick=()=>{
       const viewer = document.getElementById("examPdfViewer");
       const link = document.getElementById("examPdfOpen");
+      const download = document.getElementById("examPdfDownload");
       const label = document.getElementById("examPdfLabel");
       if(!viewer || !link || !label) return;
       $app.querySelectorAll("[data-pdf-url]").forEach(b=>b.classList.toggle("on", b===btn));
-      viewer.src = btn.dataset.pdfUrl;
+      viewer.src = `${btn.dataset.pdfUrl}#view=FitH`;
       viewer.title = `${btn.dataset.pdfTitle} PDF`;
       link.href = btn.dataset.pdfUrl;
+      if(download) download.href = btn.dataset.pdfUrl;
       label.textContent = btn.dataset.pdfTitle;
     });
   }
@@ -1121,10 +1134,13 @@ const TAB_EXAM = `
         <button class="pdf-doc" data-pdf-title="令和8年度 広島市職員採用試験実施計画" data-pdf-url="assets/docs/r08keikaku.pdf">実施計画</button>
         <button class="pdf-doc" data-pdf-title="広島市職員採用ガイド" data-pdf-url="assets/docs/r8panhureto.pdf">採用ガイド</button>
       </div>
-      <a id="examPdfOpen" class="btn sm outline" href="assets/docs/r080417.pdf" target="_blank" rel="noopener">別タブで開く</a>
+      <div class="pdf-actions">
+        <a id="examPdfOpen" class="btn sm outline" href="assets/docs/r080417.pdf" target="_blank" rel="noopener">大きく開く</a>
+        <a id="examPdfDownload" class="btn sm ghost" href="assets/docs/r080417.pdf" download>保存</a>
+      </div>
     </div>
-    <iframe id="examPdfViewer" class="pdf-frame" title="令和8年度 1種受験案内 PDF" src="assets/docs/r080417.pdf"></iframe>
-    <div class="pdf-fallback">表示中: <strong id="examPdfLabel">令和8年度 1種受験案内</strong>。PDFはアプリ内に同梱しています。表示が崩れる場合は、上の「別タブで開く」から確認してください。</div>
+    <div class="pdf-frame-wrap"><iframe id="examPdfViewer" class="pdf-frame" title="令和8年度 1種受験案内 PDF" src="assets/docs/r080417.pdf#view=FitH"></iframe></div>
+    <div class="pdf-fallback">表示中: <strong id="examPdfLabel">令和8年度 1種受験案内</strong>。iPhoneでは上の「大きく開く」が一番読みやすいです。</div>
   </div>
 
   <h3 style="margin:16px 0 8px">参考リンク</h3>
