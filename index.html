@@ -932,6 +932,7 @@ function viewInfo(){
       <button class="info-tab on" data-tab="exam">試験概要</button>
       <button class="info-tab" data-tab="essay">小論文対策</button>
       <button class="info-tab" data-tab="interview">面接</button>
+      <button class="info-tab" data-tab="stories">体験談</button>
       <button class="info-tab" data-tab="strategy">学習戦略</button>
       <button class="info-tab" data-tab="guide">操作ガイド</button>
     </div>
@@ -946,6 +947,7 @@ function viewInfo(){
     exam: TAB_EXAM,
     essay: TAB_ESSAY,
     interview: TAB_INTERVIEW,
+    stories: TAB_STORIES,
     strategy: TAB_STRATEGY,
     guide: TAB_GUIDE,
   };
@@ -1117,20 +1119,6 @@ const TAB_INTERVIEW = `
     <div class="qa-item"><div class="qa-q">Q. 育児と仕事の両立はできますか？</div><div class="qa-a">サポート体制・自己管理・育児経験を強みとして活かせることを前向きに伝える。</div></div>
   </div>
 
-  <h3 style="margin:16px 0 8px">看護師・助産師から行政保健師へ：参考になる体験談</h3>
-  <div class="section-info" style="margin-bottom:10px">
-    <p>志望動機づくりでは、「病院での看護・助産経験を、なぜ地域の予防・継続支援に生かしたいのか」を言語化するのが大事です。以下は市役所保健師への転身理由や働き方のイメージを掴みやすい記事です。</p>
-  </div>
-  <div class="ref-links" style="font-size:14px;margin-bottom:16px">
-    <a href="https://public-connect.jp/employer/21812/blog/1242" target="_blank" rel="noopener">助産師から市役所保健師へ｜一関市役所</a>
-    <a href="https://public-connect.jp/employer/1077/blog/1091" target="_blank" rel="noopener">元助産師が語る地域医療｜松浦市役所</a>
-    <a href="https://public-connect.jp/employer/71044/blog/3259" target="_blank" rel="noopener">看護師から市役所保健師へ｜伊那市役所</a>
-    <a href="https://public-connect.jp/employer/22520/blog/2419" target="_blank" rel="noopener">病院看護師から行政保健師へ｜印西市役所</a>
-    <a href="https://public-connect.jp/employer/82/blog/1940" target="_blank" rel="noopener">医療から予防へ｜橋本市役所</a>
-    <a href="https://public-connect.jp/employer/201/blog/858" target="_blank" rel="noopener">看護師から行政保健師へ｜泉南市役所</a>
-    <a href="https://peko.co.jp/guide/experience/city-hall-nurse" target="_blank" rel="noopener">市役所で働く看護師・保健師の仕事内容</a>
-  </div>
-
   <h3 style="margin:16px 0 8px">最終面接に向けた準備</h3>
   <div class="section-info" style="margin-bottom:16px">
     <p>● 2026年度から集団討論・グループ討議は廃止</p>
@@ -1141,6 +1129,41 @@ const TAB_INTERVIEW = `
     <p>✅ 困難事例への対応は、傾聴・記録・チーム対応・関係機関連携の順で話せるようにする</p>
     <p>✅ 保健師の視点（個人支援から地域課題の把握、施策化）を軸に答える</p>
     <p>✅ 育児や生活経験を、住民理解・継続支援・調整力の強みに変換して伝える</p>
+  </div>
+</div>`;
+
+const TAB_STORIES = `
+<div class="card" style="margin-top:16px">
+  <h2 style="margin-bottom:12px">看護師・助産師から行政保健師へ</h2>
+  <img class="exam-image" src="assets/stories-infographic.png" alt="看護師・助産師から行政保健師へ進むキャリアの流れを示す挿し絵">
+
+  <div class="section-info" style="margin-bottom:16px">
+    <p>病院や助産の経験は、面接で「住民の生活を継続的に支える力」として話しやすい強みです。読むときは、転職理由、行政でやりたい支援、病院経験の生かし方の3点をメモしてください。</p>
+  </div>
+
+  <h3 style="margin:16px 0 8px">自治体インタビュー</h3>
+  <div class="qa-list">
+    <div class="qa-item"><div class="qa-q">助産師から市役所保健師へ｜一関市役所</div><div class="qa-a">助産師経験を地域の母子保健に生かす視点が参考になります。妊娠・出産だけでなく、その後の育児や家庭状況まで見て支える志望動機づくりに使えます。<br><a href="https://public-connect.jp/employer/21812/blog/1242" target="_blank" rel="noopener">記事を読む</a></div></div>
+    <div class="qa-item"><div class="qa-q">元助産師が語る地域医療｜松浦市役所</div><div class="qa-a">助産師としての個別支援を、地域全体の母子保健・予防活動へ広げる考え方を掴めます。病院から行政へ視野が広がる理由を整理したいときに。<br><a href="https://public-connect.jp/employer/1077/blog/1091" target="_blank" rel="noopener">記事を読む</a></div></div>
+    <div class="qa-item"><div class="qa-q">看護師から市役所保健師へ｜伊那市役所</div><div class="qa-a">看護師経験を、病気になる前の支援や地域での相談支援にどうつなげるかが分かりやすい体験談です。職務理解の言語化に向いています。<br><a href="https://public-connect.jp/employer/71044/blog/3259" target="_blank" rel="noopener">記事を読む</a></div></div>
+    <div class="qa-item"><div class="qa-q">病院看護師から行政保健師へ｜印西市役所</div><div class="qa-a">医療現場で感じた「発症前・重症化前に関わる必要性」を、行政保健師の志望理由に変換するヒントになります。<br><a href="https://public-connect.jp/employer/22520/blog/2419" target="_blank" rel="noopener">記事を読む</a></div></div>
+    <div class="qa-item"><div class="qa-q">看護師から行政保健師へ｜泉南市役所</div><div class="qa-a">看護師から行政へ移るときの仕事内容の違いや、住民との関わり方を把握するのに使いやすい記事です。<br><a href="https://public-connect.jp/employer/201/blog/858" target="_blank" rel="noopener">記事を読む</a></div></div>
+  </div>
+
+  <h3 style="margin:16px 0 8px">note・ブログ</h3>
+  <div class="qa-list">
+    <div class="qa-item"><div class="qa-q">県庁保健師の公務員試験体験談｜note</div><div class="qa-a">自治体保健師を目指すときの試験準備、情報収集、面接対策の雰囲気を掴む読み物として使えます。市役所志望でも、行政保健師としての準備の流れが参考になります。<br><a href="https://note.com/modern_auklet657/n/nb6cbe5ac39e6" target="_blank" rel="noopener">記事を読む</a></div></div>
+    <div class="qa-item"><div class="qa-q">保健師の公務員試験体験談｜note</div><div class="qa-a">勉強計画や受験時の考え方を確認する用途向きです。自分の学習計画に置き換えながら読むと、試験直前の優先順位を決めやすくなります。<br><a href="https://note.com/jasmine_pns/n/nf50e65dbb834" target="_blank" rel="noopener">記事を読む</a></div></div>
+    <div class="qa-item"><div class="qa-q">行政保健師試験のまとめブログ</div><div class="qa-a">自治体保健師試験で聞かれやすい内容や、受験準備の流れをざっくり確認する補助資料として使えます。公式情報と照らし合わせながら読むのがおすすめです。<br><a href="https://www.hokenshi.com/entry/2015/05/30/083527" target="_blank" rel="noopener">記事を読む</a></div></div>
+    <div class="qa-item"><div class="qa-q">市役所で働く看護師・保健師の仕事内容</div><div class="qa-a">市役所での仕事内容、病院勤務との違い、保健師・看護師資格を生かす働き方を概観できます。面接前の職務理解チェックに。<br><a href="https://peko.co.jp/guide/experience/city-hall-nurse" target="_blank" rel="noopener">記事を読む</a></div></div>
+  </div>
+
+  <h3 style="margin:16px 0 8px">面接で使う読み方</h3>
+  <div class="section-info">
+    <p>● 「病院で見た課題」から「地域で予防的に関わりたい」へつなげる</p>
+    <p>● 看護師経験は、観察力・説明力・多職種連携の強みとして整理する</p>
+    <p>● 助産師経験は、妊娠期から子育て期までの切れ目ない支援に結びつける</p>
+    <p>● 体験談の言葉をそのまま使わず、自分の経験に置き換えて話す</p>
   </div>
 </div>`;
 
