@@ -40,6 +40,7 @@ small,.caption{font-size:12px;line-height:1.42;color:var(--c-text-2);letter-spac
 .nav-inner{max-width:980px;margin:0 auto;height:48px;padding:0 16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
 .brand{font-family:var(--font-display);font-size:17px;font-weight:600;letter-spacing:-0.2px}
 .brand .dot{color:var(--c-blue)}
+.brand{cursor:pointer}
 .nav-actions{display:flex;align-items:center;gap:8px}
 
 .wrap{max-width:880px;margin:0 auto;padding:24px 16px 80px;padding-bottom:calc(80px + env(safe-area-inset-bottom))}
@@ -80,6 +81,13 @@ small,.caption{font-size:12px;line-height:1.42;color:var(--c-text-2);letter-spac
 .mode .meta .t{font-weight:600;font-size:15px}
 .mode .meta .d{font-size:12px;color:var(--c-text-2);letter-spacing:normal}
 .mode .arrow{color:var(--c-text-2);flex:0 0 auto;margin-left:8px}
+.study-card{background:var(--c-bg);border:1px solid var(--c-line);border-radius:14px;padding:16px;margin-bottom:10px}
+.study-card .head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:10px}
+.study-card .title{font-weight:600;font-size:16px}
+.study-card .desc{font-size:12px;color:var(--c-text-2);letter-spacing:normal;margin-top:2px}
+.count-buttons{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.count-btn{background:var(--c-bg-2);border:1px solid transparent;border-radius:10px;padding:9px 8px;font-size:13px;font-weight:600;text-align:center}
+.count-btn:hover{border-color:var(--c-blue);background:rgba(0,113,227,0.06)}
 
 .q-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;font-size:12px;color:var(--c-text-2);letter-spacing:normal;gap:8px;flex-wrap:wrap}
 .rate-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0 12px}
@@ -112,6 +120,7 @@ small,.caption{font-size:12px;line-height:1.42;color:var(--c-text-2);letter-spac
 .feedback .src{margin-top:10px;font-size:12px;color:var(--c-text-2);letter-spacing:normal}
 .feedback .ref-links{margin-top:8px;font-size:13px}
 .feedback .ref-links a{display:inline-block;margin-right:10px;margin-top:4px}
+.explain-image{display:block;width:100%;height:auto;border-radius:12px;border:1px solid var(--c-line);margin:12px 0;background:#fff}
 
 .bar{height:4px;background:var(--c-bg-2);border-radius:99px;overflow:hidden;margin:6px 0 16px}
 .bar > i{display:block;height:100%;background:var(--c-blue);transition:width .3s}
@@ -199,7 +208,7 @@ hr{border:none;border-top:1px solid var(--c-line);margin:18px 0}
 
 <header class="nav">
   <div class="nav-inner">
-    <div class="brand">保健師対策 <span class="dot">あやか用</span></div>
+    <div class="brand" role="button" tabindex="0" aria-label="ホームへ戻る">保健師対策 <span class="dot">あやか用</span></div>
     <div class="nav-actions">
       <button class="btn ghost sm" id="navProfile">👤 <span id="navUserLabel">ゲスト</span></button>
       <button class="btn ghost sm hidden" id="navHome">ホーム</button>
@@ -457,16 +466,29 @@ function viewHome(){
 
     <h3 style="margin:18px 0 8px">科目別に学ぶ</h3>
     <div class="grid grid-3" style="margin-bottom:16px">
-      <button class="mode" data-quick="専門"><div class="meta"><div class="t">専門</div><div class="d">${domTotal("専門")}問。保健師専門を集中学習</div></div><div class="arrow">›</div></button>
-      <button class="mode" data-quick="教養"><div class="meta"><div class="t">教養</div><div class="d">${domTotal("教養")}問。数的・文章・知識分野</div></div><div class="arrow">›</div></button>
-      <button class="mode" data-quick="時事"><div class="meta"><div class="t">時事</div><div class="d">${domTotal("時事")}問。保健医療政策を確認</div></div><div class="arrow">›</div></button>
+      ${["専門","教養","時事"].map(d=>`
+        <div class="study-card">
+          <div class="head"><div><div class="title">${esc(d)}</div><div class="desc">${domTotal(d)}問。${d==="専門"?"保健師専門を集中学習":d==="教養"?"数的・文章・知識分野":"保健医療政策を確認"}</div></div></div>
+          <div class="count-buttons">
+            ${[10,20,30].map(n=>`<button class="count-btn" data-domain="${esc(d)}" data-count="${n}">${n}問</button>`).join("")}
+          </div>
+        </div>`).join("")}
     </div>
 
     <h3 style="margin:18px 0 8px">過去問で学ぶ</h3>
     <div class="grid grid-3" style="margin-bottom:16px">
-      <button class="mode" data-quick-official-general><div class="meta"><div class="t">公式過去問参照</div><div class="d">${officialGeneralTotal}問。地方上級の教養対策</div></div><div class="arrow">›</div></button>
-      <button class="mode" data-quick-specialist-past><div class="meta"><div class="t">専門の過去問</div><div class="d">${specialistPastTotal}問。専門試験を実戦寄りに</div></div><div class="arrow">›</div></button>
-      <button class="mode" data-quick-general-past><div class="meta"><div class="t">教養の過去問</div><div class="d">${generalPastTotal}問。予想問題を除いて演習</div></div><div class="arrow">›</div></button>
+      <div class="study-card">
+        <div class="head"><div><div class="title">公式過去問参照</div><div class="desc">${officialGeneralTotal}問。地方上級の教養対策</div></div></div>
+        <div class="count-buttons">${[10,20,30].map(n=>`<button class="count-btn" data-past="official-general" data-count="${n}">${n}問</button>`).join("")}</div>
+      </div>
+      <div class="study-card">
+        <div class="head"><div><div class="title">専門の過去問</div><div class="desc">${specialistPastTotal}問。専門試験を実戦寄りに</div></div></div>
+        <div class="count-buttons">${[10,20,30].map(n=>`<button class="count-btn" data-past="specialist" data-count="${n}">${n}問</button>`).join("")}</div>
+      </div>
+      <div class="study-card">
+        <div class="head"><div><div class="title">教養の過去問</div><div class="desc">${generalPastTotal}問。予想問題を除いて演習</div></div></div>
+        <div class="count-buttons">${[10,20,30].map(n=>`<button class="count-btn" data-past="general" data-count="${n}">${n}問</button>`).join("")}</div>
+      </div>
     </div>
 
     <h3 style="margin:18px 0 8px">細かく設定する</h3>
@@ -499,10 +521,13 @@ function viewHome(){
   $app.querySelector('[data-act="history"]').onclick=()=>viewHistory();
   $app.querySelector('[data-quick-today]').onclick=()=>startQuiz({domains:DOMAINS.slice(),categories:[],types:[],pick:"random",count:10,mode:"practice"});
   $app.querySelector('[data-quick-past]').onclick=()=>startQuiz({domains:DOMAINS.slice(),categories:[],types:PAST_TYPES.slice(),pick:"random",count:10,mode:"practice"});
-  $app.querySelector('[data-quick-official-general]').onclick=()=>startQuiz({domains:["教養"],categories:[],types:["公式過去問参照","公式過去問転載"],pick:"random",count:10,mode:"practice"});
-  $app.querySelector('[data-quick-specialist-past]').onclick=()=>startQuiz({domains:["専門"],categories:[],types:PAST_TYPES.slice(),pick:"random",count:10,mode:"practice"});
-  $app.querySelector('[data-quick-general-past]').onclick=()=>startQuiz({domains:["教養"],categories:[],types:PAST_TYPES.slice(),pick:"random",count:10,mode:"practice"});
-  $app.querySelectorAll('[data-quick]').forEach(b=>b.onclick=()=>startQuiz({domains:[b.dataset.quick],categories:[],types:[],pick:"random",count:10,mode:"practice"}));
+  $app.querySelectorAll('[data-domain]').forEach(b=>b.onclick=()=>startQuiz({domains:[b.dataset.domain],categories:[],types:[],pick:"random",count:parseInt(b.dataset.count,10),mode:"practice"}));
+  $app.querySelectorAll('[data-past]').forEach(b=>b.onclick=()=>{
+    const n = parseInt(b.dataset.count,10);
+    if(b.dataset.past==="official-general") return startQuiz({domains:["教養"],categories:[],types:["公式過去問参照","公式過去問転載"],pick:"random",count:n,mode:"practice"});
+    if(b.dataset.past==="specialist") return startQuiz({domains:["専門"],categories:[],types:PAST_TYPES.slice(),pick:"random",count:n,mode:"practice"});
+    return startQuiz({domains:["教養"],categories:[],types:PAST_TYPES.slice(),pick:"random",count:n,mode:"practice"});
+  });
   document.querySelector('[data-quick-weak]').onclick=()=>startQuiz({domains:DOMAINS.slice(),categories:[],types:[],pick:"weak",count:10,mode:"practice"});
   document.getElementById("exportHistory").onclick=exportHistory;
   document.getElementById("importHistory").onclick=()=>document.getElementById("historyImportFile").click();
@@ -619,6 +644,7 @@ function viewSetup(){
 function buildPool(cfg){
   const h = getHistory();
   let pool = QUESTIONS.slice();
+  if(cfg.onlyIds && cfg.onlyIds.length) pool = pool.filter(q=>cfg.onlyIds.includes(q.id));
   if(cfg.domains && cfg.domains.length) pool = pool.filter(q=>cfg.domains.includes(domainOf(q.category)));
   if(cfg.categories && cfg.categories.length) pool = pool.filter(q=>cfg.categories.includes(q.category));
   if(cfg.types && cfg.types.length) pool = pool.filter(q=>cfg.types.includes(q.type || ""));
@@ -776,10 +802,12 @@ function typeTagHTML(q){
 }
 function renderFeedbackHTML(q, ok){
   const links = (q.links||[]).map(l=>`<a href="${esc(l.url)}" target="_blank" rel="noopener">📖 ${esc(l.title)}</a>`).join("");
+  const image = q.explanationImage ? `<img class="explain-image" src="${esc(q.explanationImage)}" alt="${esc(q.question)}の解説図">` : "";
   return `
     <div class="feedback ${ok?"ok":"ng"}">
       <div class="head">${ok?"✓ 正解":"✗ 不正解"}</div>
       <div style="line-height:1.7">${esc(q.explanation)}</div>
+      ${image}
       ${q.source ? `<div class="src">📄 出典: ${esc(q.source)}</div>` : ""}
       ${links ? `<div class="ref-links" style="margin-top:10px">${links}</div>` : ""}
     </div>`;
@@ -902,7 +930,7 @@ function viewHistory(){
       <table class="table">
         <thead><tr><th>領域</th><th>分野</th><th>問題（先頭）</th><th class="num">回数</th><th class="num">正答率</th><th>直近</th></tr></thead>
         <tbody>
-          ${rows.map(r=>`<tr>
+          ${rows.map(r=>`<tr class="history-row" data-qid="${r.q.id}" style="cursor:pointer">
             <td><span class="q-tag ${domTagClass(domainOf(r.q.category))}">${esc(domainOf(r.q.category))}</span></td>
             <td>${esc(r.q.category)}</td>
             <td>${esc(r.q.question.slice(0,28))}${r.q.question.length>28?'…':''}</td>
@@ -916,7 +944,53 @@ function viewHistory(){
     <div class="actions"><button class="btn outline block" id="back">← ホームへ</button></div>
   `);
   setNav();
+  $app.querySelectorAll(".history-row").forEach(row=>row.onclick=()=>viewQuestionDetail(parseInt(row.dataset.qid,10), "history"));
   document.getElementById("back").onclick=viewHome;
+}
+
+function viewQuestionDetail(qid, from="history"){
+  const q = QUESTIONS.find(x=>x.id===qid);
+  if(!q){ alert("問題が見つかりません。"); return; }
+  $app.dataset.view="question-detail";
+  const d = domainOf(q.category);
+  const h = getHistory()[q.id];
+  const total = h ? h.correct + h.wrong : 0;
+  const acc = total ? Math.round(h.correct/total*100) : null;
+  const choices = q.choices.map((c,i)=>`
+    <div class="choice disabled ${i===q.answer?'correct':''}" style="cursor:default">
+      <span class="num">${i+1}</span><span>${esc(c)}</span>
+    </div>`).join("");
+  const links = (q.links||[]).map(l=>`<a href="${esc(l.url)}" target="_blank" rel="noopener">📖 ${esc(l.title)}</a>`).join("");
+  const image = q.explanationImage ? `<img class="explain-image" src="${esc(q.explanationImage)}" alt="${esc(q.question)}の解説図">` : "";
+
+  render(`
+    <h1 style="font-size:28px;margin-bottom:6px">問題詳細</h1>
+    <p class="muted" style="margin-bottom:18px">回答履歴から確認</p>
+
+    <div class="card">
+      <div class="q-meta">
+        <span><span class="q-tag ${domTagClass(d)}">${esc(d)}</span><span class="q-tag">${esc(q.category)}</span>${typeTagHTML(q)}</span>
+        <span>${total ? `履歴: ${h.correct}/${total} 正解（${acc}%）` : "未回答"}</span>
+      </div>
+      <div class="q-text">${esc(q.question)}</div>
+      <div>${choices}</div>
+      <div class="feedback ok">
+        <div class="head">正解: ${q.answer+1}. ${esc(q.choices[q.answer])}</div>
+        <div style="line-height:1.7">${esc(q.explanation)}</div>
+        ${image}
+        ${q.source ? `<div class="src">📄 出典: ${esc(q.source)}</div>` : ""}
+        ${links ? `<div class="ref-links" style="margin-top:10px">${links}</div>` : ""}
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="btn outline" id="back">← 回答履歴へ</button>
+      <button class="btn" id="retry">この問題をもう一度解く</button>
+    </div>
+  `);
+  setNav();
+  document.getElementById("back").onclick=()=>viewHistory();
+  document.getElementById("retry").onclick=()=>startQuiz({domains:[d],categories:[q.category],types:[],pick:"random",count:1,mode:"practice",onlyIds:[q.id]});
 }
 
 /* ===== 試験情報ページ ===== */
@@ -1339,6 +1413,13 @@ function viewStats(){
 document.getElementById("navProfile").onclick = ()=>{ viewLogin(); };
 document.getElementById("navHome").onclick = ()=>{ if(DB.currentUser) viewHome(); };
 document.getElementById("navInfo").onclick = ()=>{ viewInfo(); };
+document.querySelector(".brand").onclick = ()=>{ DB.currentUser ? viewHome() : viewLogin(); };
+document.querySelector(".brand").onkeydown = (e)=>{
+  if(e.key==="Enter" || e.key===" "){
+    e.preventDefault();
+    DB.currentUser ? viewHome() : viewLogin();
+  }
+};
 
 (async function(){
   DB = loadDB();
