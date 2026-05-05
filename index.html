@@ -185,32 +185,7 @@ hr{border:none;border-top:1px solid var(--c-line);margin:18px 0}
 .qa-item{background:var(--c-bg-2);border-radius:12px;padding:14px;font-size:14px}
 .qa-q{font-weight:600;margin-bottom:6px;color:var(--c-blue)}
 .qa-a{line-height:1.6}
-.exam-graphic{border:1px solid var(--c-line);border-radius:14px;overflow:hidden;margin-bottom:18px;background:linear-gradient(180deg,#fbfcff,#fff)}
-.exam-hero-band{display:grid;grid-template-columns:1.15fr .85fr;gap:0;border-bottom:1px solid var(--c-line)}
-.exam-hero-copy{padding:18px}
-.exam-hero-copy .kicker{font-size:12px;font-weight:700;color:var(--c-blue);letter-spacing:normal;margin-bottom:6px}
-.exam-hero-copy .big{font-family:var(--font-display);font-size:28px;font-weight:700;line-height:1.15;letter-spacing:normal;margin-bottom:8px}
-.exam-hero-copy p{font-size:14px;color:var(--c-text-2);margin:0;line-height:1.7}
-.exam-score{display:grid;grid-template-columns:1fr 1fr;background:#f5f8ff;border-left:1px solid var(--c-line)}
-.exam-score div{padding:16px;border-bottom:1px solid rgba(0,0,0,.06)}
-.exam-score div:nth-child(2n){border-left:1px solid rgba(0,0,0,.06)}
-.exam-score strong{display:block;font-size:24px;line-height:1.1;letter-spacing:normal}
-.exam-score span{display:block;margin-top:4px;font-size:12px;color:var(--c-text-2);letter-spacing:normal}
-.exam-flow{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
-.exam-step{position:relative;padding:16px 14px;min-height:118px;border-right:1px solid var(--c-line)}
-.exam-step:last-child{border-right:0}
-.exam-step .num{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--c-text);color:#fff;font-size:13px;font-weight:700;margin-bottom:10px}
-.exam-step .label{font-weight:700;font-size:15px;margin-bottom:4px;letter-spacing:normal}
-.exam-step .detail{font-size:12px;line-height:1.55;color:var(--c-text-2);letter-spacing:normal}
-.priority-map{display:grid;grid-template-columns:1.15fr .85fr;gap:12px;margin:16px 0}
-.priority-list{display:flex;flex-direction:column;gap:8px}
-.priority-row{display:grid;grid-template-columns:86px 1fr;gap:10px;align-items:center;background:var(--c-bg-2);border-radius:12px;padding:10px 12px;font-size:13px}
-.priority-row b{font-size:12px;color:var(--c-blue);letter-spacing:normal}
-.priority-bar{height:8px;background:#e6e6ea;border-radius:99px;overflow:hidden;margin-top:5px}
-.priority-bar i{display:block;height:100%;background:var(--c-blue);border-radius:99px}
-.focus-box{background:#fff8e8;border:1px solid #f2d7a8;border-radius:12px;padding:13px;font-size:13px;line-height:1.7}
-.focus-box strong{display:block;margin-bottom:4px;color:#8a6000}
-@media (max-width:720px){.exam-hero-band,.priority-map{grid-template-columns:1fr}.exam-score{border-left:0;border-top:1px solid var(--c-line)}.exam-flow{grid-template-columns:1fr}.exam-step{border-right:0;border-bottom:1px solid var(--c-line);min-height:auto}.exam-step:last-child{border-bottom:0}}
+.exam-image{display:block;width:100%;height:auto;border-radius:14px;border:1px solid var(--c-line);margin:0 0 18px;background:var(--c-bg-2)}
 
 /* type tag */
 .type-tag{display:inline-block;padding:2px 8px;border-radius:6px;font-size:10px;font-weight:600;letter-spacing:normal;margin-left:4px;vertical-align:middle}
@@ -992,51 +967,32 @@ function viewInfo(){
 const TAB_EXAM = `
 <div class="card" style="margin-top:16px">
   <h2 style="margin-bottom:12px">試験構成</h2>
-  <div class="exam-graphic" aria-label="広島市保健師採用試験の概要">
-    <div class="exam-hero-band">
-      <div class="exam-hero-copy">
-        <div class="kicker">2026年度 1種・保健師</div>
-        <div class="big">一次は「教養・専門・小論文」<br>以後は面接中心</div>
-        <p>広島市公式の令和8年度情報では、保健師は1種教養試験と保健師専門試験を受験します。集団討論・グループ討議は全試験区分で廃止です。</p>
-      </div>
-      <div class="exam-score">
-        <div><strong>150分</strong><span>教養試験</span></div>
-        <div><strong>120分</strong><span>専門試験</span></div>
-        <div><strong>60分</strong><span>小論文</span></div>
-        <div><strong>面接</strong><span>人物評価</span></div>
-      </div>
-    </div>
-    <div class="exam-flow">
-      <div class="exam-step"><div class="num">1</div><div class="label">申込</div><div class="detail">4〜5月。令和8年度は4/17〜5/11。</div></div>
-      <div class="exam-step"><div class="num">2</div><div class="label">一次試験</div><div class="detail">教養・専門・小論文。ここが学習量の中心。</div></div>
-      <div class="exam-step"><div class="num">3</div><div class="label">面接</div><div class="detail">志望動機、職務理解、広島市の地域課題を確認。</div></div>
-      <div class="exam-step"><div class="num">4</div><div class="label">最終合格</div><div class="detail">例年8月下旬ごろ。公式発表を必ず確認。</div></div>
-    </div>
-  </div>
-
-  <h3 style="margin-bottom:8px">学習優先度</h3>
-  <div class="priority-map">
-    <div class="priority-list">
-      <div class="priority-row"><b>最優先</b><div>専門：公衆衛生看護・疫学・法規・母子/成人/精神/感染症<div class="priority-bar"><i style="width:92%"></i></div></div></div>
-      <div class="priority-row"><b>高</b><div>教養：数的推理・判断推理・資料解釈・文章理解<div class="priority-bar"><i style="width:76%"></i></div></div></div>
-      <div class="priority-row"><b>中</b><div>社会科学・地方自治・憲法の基礎、小論文テーマ<div class="priority-bar"><i style="width:58%"></i></div></div></div>
-      <div class="priority-row"><b>低</b><div>行政法の専門論点、広島ローカルの細かい暗記<div class="priority-bar"><i style="width:24%"></i></div></div></div>
-    </div>
-    <div class="focus-box">
-      <strong>今回の精査方針</strong>
-      行政法は行政事務（法律）の専門分野寄りなので、保健師向け教養からは外しました。残すのは、地方自治・情報公開・個人情報保護・説明責任など、公務員としての基礎理解に直結するものだけです。
-    </div>
-  </div>
-
-  <h3 style="margin:16px 0 8px">一次試験の科目</h3>
+  <img class="exam-image" src="assets/exam-infographic.png" alt="申込、一次試験、面接、合格の流れと、専門・教養・小論文の学習優先度を示すインフォグラフィック">
+  <div class="info-badge sp">1種・保健師</div>
   <table class="table" style="margin-bottom:18px">
-    <thead><tr><th>科目</th><th>時間</th><th>内容</th><th>対策</th></tr></thead>
+    <thead><tr><th>科目</th><th>時間</th><th>問題数</th><th>備考</th></tr></thead>
     <tbody>
-      <tr><td>教養試験</td><td>150分</td><td>社会・人文・自然、文章理解、判断推理、数的推理、資料解釈等</td><td>知能分野を優先</td></tr>
-      <tr><td>専門試験</td><td>120分</td><td>保健師専門領域</td><td>国試過去問＋自治体専門例題</td></tr>
-      <tr><td>小論文</td><td>60分</td><td>1,000字程度。行政サービス、地域課題、市の強み等</td><td>週1本で型を作る</td></tr>
+      <tr><td>教養試験</td><td>150分</td><td>知識30問中20問選択＋知能25問</td><td>社会・人文・自然、文章理解、判断推理、数的推理、資料解釈等</td></tr>
+      <tr><td>専門試験</td><td>120分</td><td>40問全問必答</td><td>保健師専門領域</td></tr>
+      <tr><td>小論文</td><td>60分</td><td>1,000字程度</td><td>地域保健・社会課題テーマ</td></tr>
     </tbody>
   </table>
+
+  <h3 style="margin-bottom:8px">試験日程（2026年度予定）</h3>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-body"><div class="tl-label">4〜5月</div><div>受験申込（2026年度: 4/17〜5/11）</div></div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-body"><div class="tl-label">6月中旬</div><div>一次試験（教養・専門・小論文）</div></div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-body"><div class="tl-label">7月以降</div><div>個別面接・人物評価（集団討論は2026年度から廃止）</div></div></div>
+    <div class="tl-item last"><div class="tl-dot"></div><div class="tl-body"><div class="tl-label">8月末</div><div>最終合格発表</div></div></div>
+  </div>
+
+  <h3 style="margin:16px 0 8px">学習優先度</h3>
+  <div class="section-info" style="margin-bottom:16px">
+    <p>● 最優先：専門試験（保健師国試レベル）</p>
+    <p>● 次点：教養の知能分野（数的推理・判断推理・資料解釈・文章理解）</p>
+    <p>● 補強：社会科学・地方自治・憲法の基礎、小論文、面接</p>
+    <p>● 行政法の専門論点や細かい広島ローカル暗記は、保健師対策では優先度を下げます。</p>
+  </div>
 
   <h3 style="margin:16px 0 8px">専門試験の出題分野</h3>
   <div class="chips">
@@ -1072,6 +1028,7 @@ const TAB_EXAM = `
 const TAB_ESSAY = `
 <div class="card" style="margin-top:16px">
   <h2 style="margin-bottom:12px">小論文対策</h2>
+  <img class="exam-image" src="assets/essay-infographic.png" alt="小論文対策の流れ。課題把握、保健師の視点、具体策、結論を示すインフォグラフィック">
   <div class="info-badge">試験形式</div>
   <p>● 60分 / 1,000字程度 / テーマ型（令和7年度公開課題をもとに練習）</p>
 
@@ -1143,6 +1100,7 @@ const TAB_ESSAY = `
 const TAB_INTERVIEW = `
 <div class="card" style="margin-top:16px">
   <h2 style="margin-bottom:12px">面接対策</h2>
+  <img class="exam-image" src="assets/interview-infographic.png" alt="面接対策の要点。志望動機、職務理解、対話力、連携を示すインフォグラフィック">
 
   <h3 style="margin-bottom:8px">二次試験：個別面接</h3>
   <div class="section-info" style="margin-bottom:16px">
@@ -1157,6 +1115,20 @@ const TAB_INTERVIEW = `
     <div class="qa-item"><div class="qa-q">Q. 広島市の保健上の課題は何だと思いますか？</div><div class="qa-a">少子化・高齢化・精神保健・被爆二世の健康管理等。健康ひろしま21の重点課題を把握しておく。</div></div>
     <div class="qa-item"><div class="qa-q">Q. 困難な対象者（拒否・暴言等）にどう対応しますか？</div><div class="qa-a">すぐ諦めない粘り強さ・チームでの対応・記録・上司への報告の重要性を述べる。</div></div>
     <div class="qa-item"><div class="qa-q">Q. 育児と仕事の両立はできますか？</div><div class="qa-a">サポート体制・自己管理・育児経験を強みとして活かせることを前向きに伝える。</div></div>
+  </div>
+
+  <h3 style="margin:16px 0 8px">看護師・助産師から行政保健師へ：参考になる体験談</h3>
+  <div class="section-info" style="margin-bottom:10px">
+    <p>志望動機づくりでは、「病院での看護・助産経験を、なぜ地域の予防・継続支援に生かしたいのか」を言語化するのが大事です。以下は市役所保健師への転身理由や働き方のイメージを掴みやすい記事です。</p>
+  </div>
+  <div class="ref-links" style="font-size:14px;margin-bottom:16px">
+    <a href="https://public-connect.jp/employer/21812/blog/1242" target="_blank" rel="noopener">助産師から市役所保健師へ｜一関市役所</a>
+    <a href="https://public-connect.jp/employer/1077/blog/1091" target="_blank" rel="noopener">元助産師が語る地域医療｜松浦市役所</a>
+    <a href="https://public-connect.jp/employer/71044/blog/3259" target="_blank" rel="noopener">看護師から市役所保健師へ｜伊那市役所</a>
+    <a href="https://public-connect.jp/employer/22520/blog/2419" target="_blank" rel="noopener">病院看護師から行政保健師へ｜印西市役所</a>
+    <a href="https://public-connect.jp/employer/82/blog/1940" target="_blank" rel="noopener">医療から予防へ｜橋本市役所</a>
+    <a href="https://public-connect.jp/employer/201/blog/858" target="_blank" rel="noopener">看護師から行政保健師へ｜泉南市役所</a>
+    <a href="https://peko.co.jp/guide/experience/city-hall-nurse" target="_blank" rel="noopener">市役所で働く看護師・保健師の仕事内容</a>
   </div>
 
   <h3 style="margin:16px 0 8px">最終面接に向けた準備</h3>
@@ -1175,6 +1147,7 @@ const TAB_INTERVIEW = `
 const TAB_STRATEGY = `
 <div class="card" style="margin-top:16px">
   <h2 style="margin-bottom:12px">育児中でも合格できる学習戦略</h2>
+  <img class="exam-image" src="assets/strategy-infographic.png" alt="学習戦略。毎日10問、苦手復習、小論文、面接練習、週末まとめを示すインフォグラフィック">
 
   <h3 style="margin-bottom:8px">優先度マトリクス</h3>
   <table class="table" style="margin-bottom:18px">
@@ -1219,6 +1192,7 @@ const TAB_STRATEGY = `
 const TAB_GUIDE = `
 <div class="card" style="margin-top:16px">
   <h2 style="margin-bottom:12px">操作ガイド</h2>
+  <img class="exam-image" src="assets/guide-infographic.png" alt="操作ガイド。履歴を書き出す、JSON保存、新しいURLを開く、履歴を読み込む流れのインフォグラフィック">
 
   <h3 style="margin:16px 0 8px">iPhoneへ新しいHTMLを送る前</h3>
   <div class="section-info">
